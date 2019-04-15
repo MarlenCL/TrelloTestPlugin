@@ -1,0 +1,57 @@
+<div>
+    <a routerLink="/home">
+      <span class="badge">Home</span>
+    </a>
+    <span> > Informes</span>
+</div>
+<div class="container-fluid">
+  <div>
+    <span>{{recuentoTarjeta.SUMTOTAL}} tarjetas en el tablero</span>
+  </div>
+  <div>
+    <span>TODO: {{recuentoTarjeta.NUM_TODO}} / IN_PROGRESS: {{recuentoTarjeta.NUM_IN_PROGRESS}} / BLOCKED: {{recuentoTarjeta.NUM_BLOCKED}}/ DONE: {{recuentoTarjeta.NUM_DONE}}</span>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <td *ngFor="let headValue of getCabeceraTablaInforme()">{{headValue}}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reg of getServiceInform()">
+            <td>{{reg.dateLastActivity | date}}</td>
+            <td>{{reg.cardName}}</td>
+            <td [class]="getColorEstado(reg.list)">{{reg.list}}</td>
+            <td>{{reg.username}}</td>
+            <td>{{reg.spentToday}}</td>
+            <td>{{reg.spent}}</td>
+            <td>
+              <div class="firstEstimate">
+                <div>{{reg.estimate}} </div>
+                <div *ngIf="reg.estimate!=reg.firstEstimate">
+                    ({{reg.firstEstimate}})
+                  </div>
+              </div>
+            </td>
+            <td>{{reg.remaining}}</td>
+            <td>{{reg.lastNote}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4"></td>
+            <td *ngFor="let sumaTotal of getFooterInforme()">
+                  {{sumaTotal}}
+            </td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+      <button id="urlButton" (click)="generateUrl()">Generar url</button>
+
+    </div>
+  </div>
+</div>

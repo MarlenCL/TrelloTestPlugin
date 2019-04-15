@@ -1,0 +1,67 @@
+<nav>
+    <a routerLink="/informe">Informes</a>
+</nav>
+<div class="container">
+    <header>
+      <h1>Trello Daily Snapshot</h1>
+      <h2>¿Qué soy?</h2>
+      <p>Trello Daily Snapshot es una pequeña aplicación para crear informes diarios basados en la actividad de Trello y
+        su extensión Plus! for Trello.</p>
+      <p>+info: <a href="https://github.gsissc.myatos.net/ES-TEF-LDC-LAB-PILOTS/trello-daily-snapshot"
+          target="_blank">https://github.gsissc.myatos.net/ES-TEF-LDC-LAB-PILOTS/trello-daily-snapshot</a></p>
+    </header>
+
+    <body>
+      <h2>Generar la url</h2>
+      <ul>
+        <li>
+          <a href="https://trello.com/1/authorize?expiration=never&name=Trello%20Daily%20Snapshot&key=20dd95f604b656a212c53fda8bbe5f04&scope=read&response_type=token"
+            target="_blank">Generar authorization token</a> para Trello Daily Snapshot y copiarlo aquí:
+          <div class="content">
+            <input [(ngModel)]="authToken" class="form-control" name="authToken" id="authToken" />
+            <br />
+            <button (click)="validateToken()">Validar token</button> <span id="tokenError" class="token-error"></span>
+          </div>
+        </li>
+        <li>Seleccionar la organización y el tablero:
+          <div class="content">
+
+            <select id="boardSelect" #selectBoard (change)="loadLists()" [(ngModel)]="boardSelect">
+                <option>Seleccione un tablero</option>
+
+              <option *ngFor="let board of boards" [value]=board.id>
+                {{(board.organization) ? board.organization.displayName : ''}} /
+                {{board.name}}</option>
+            </select>
+          </div>
+        </li>
+        <li>Seleccionar las listas del tablero para cada estado:
+          <div class="content">
+            <div>
+              <span class="status">TODO:</span>
+              <ng-multiselect-dropdown [placeholder]="'Añade una lista'" [data]="listas" [(ngModel)]="selectedItemsToDo"
+                [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <span class="status">IN_PROGRESS:</span>
+            <ng-multiselect-dropdown [placeholder]="'Añade una lista'" [data]="listas" [(ngModel)]="selectedItemsProgress"
+              [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+            <span class="status">BLOCKED:</span>
+            <ng-multiselect-dropdown [placeholder]="'Añade una lista'" [data]="listas" [(ngModel)]="selectedItemsBlocked"
+              [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+            <span class="status">DONE:</span>
+            <ng-multiselect-dropdown [placeholder]="'Añade una lista'" [data]="listas" [(ngModel)]="selectedItemsDone"
+              [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div>
+        </li>
+        <li>Generar url permanente para entrar a Trello Daily Snapshot:
+          <div class="content">
+            <button id="urlButton" (click)="generateUrl()">Generar url</button>
+          </div>
+        </li>
+      </ul>
+    </body>
+  </div>

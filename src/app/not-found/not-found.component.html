@@ -1,0 +1,13 @@
+<div>
+  <h2>URL NO ENCONTRADA</h2>
+  <p>No se ha encontrado la URL solicitada</p>
+  <p>Prueba con las siguientes URL</p>
+  <ul>
+    <li *ngFor="let url of urls.url">
+        <a routerLink="{{url.direction}}">
+          <span class="badge">{{url.nameUrl}}</span>
+        </a>
+    </li>
+
+  </ul>
+</div>

@@ -1,0 +1,30 @@
+.firstEstimate{
+  display: flex !important;
+}
+.firstEstimate>div:nth-child(2){
+  color: rgb(182, 171, 171);
+  padding-left:5px;
+}
+.in_progress_class{
+  color: #856404;
+  background-color: #fff3cd;
+}
+.done_class{
+  color: #155724;
+  background-color: #d4edda;
+}
+
+.todo_class{
+  color: #004085;
+  background-color: #cce5ff;
+  text-align: center;/*este deberia estar centrada*/
+}
+
+.blocked_class{
+  color: #721c24;
+  background-color: #f8d7da;
+}
+
+.in_progress_class,.done_class,todo_class,.blocked_class{
+  text-align:center !important;
+}
